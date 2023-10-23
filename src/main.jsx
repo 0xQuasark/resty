@@ -11,7 +11,7 @@ root.render(
 );
 
 
-
+// import.meta.env.VITE_<variable-name>
 // +----------------+
 // |      App(class)|
 // |----------------|
