@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.scss';
 
@@ -14,26 +14,29 @@ import Results from './Components/Results';
 const App = () => {
   const [data, setData] = useState();
   const [requestParams, setRequestParams] = useState({});
+  const [responseBody, setResponseBody] = useState({});
 
+  const callApi = async ({ method, url, body }) => {
+    let response = await axios({
+      method: method,
+      url: url,
+      data: body
+    });
 
-  const callApi = async ({ method, url }) => {
-    // mock output
-    // const data = {
-    //   count: 2,
-    //   results: [
-    //     {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-    //     {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-    //   ],
-    // };
-    // this.setState({data, requestParams});
-
-    let myUrl = 'https://pokeapi.co/api/v2/pokemon/'; // this will just be URL when we hook it up to a custom API
-
-    let response = await axios.get(myUrl);
-    let data = response.data.results;
+    let data = response.data;//.results;
     setData(data);
     setRequestParams({ method, url });
+    setResponseBody(response.data);
   }
+
+  // explain this in more detail:
+  // the following useEffect will run every time the requestParams object changes and the url property is not empty (which is the default state), which means that it will run every time the user submits the form.
+  useEffect(() => {
+    if (requestParams.url) {
+      callApi(requestParams);
+    }
+  }, [requestParams]);
+
 
   return (
     <React.Fragment>
@@ -41,7 +44,7 @@ const App = () => {
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
       <Form handleApiCall={callApi} />
-      {data && <Results data={data} />}
+      {data && <Results data={responseBody} />}
       <Footer />
     </React.Fragment>
   );
