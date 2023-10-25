@@ -5,7 +5,7 @@ This is a simple React application built with Vite. It includes components such 
 
 ## UML Diagram
 
-![UML Diagram](image.png)
+![UML Diagram](./image.png)
 
 ## Installation
 
