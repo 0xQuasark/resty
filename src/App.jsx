@@ -12,7 +12,7 @@ import Form from './Components/Form';
 import Results from './Components/Results';
 
 const App = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState();
   const [requestParams, setRequestParams] = useState({});
 
 
@@ -41,7 +41,7 @@ const App = () => {
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
       <Form handleApiCall={callApi} />
-      <Results data={data} />
+      {data && <Results data={data} />}
       <Footer />
     </React.Fragment>
   );
