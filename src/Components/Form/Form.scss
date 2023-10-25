@@ -1,6 +1,10 @@
 $backgroundColor: #efefef;
 $radius: 40%;
 
+.selected-method {
+  background-color: cyan; /* Change this to your preferred color */
+}
+
 form {
   display: inline-block;
   margin: auto;
@@ -19,6 +23,10 @@ form {
 
         &:hover, &.active {
           background: #fff;
+        }
+
+        &.selected-method {
+          background-color: cyan;
         }
       }
     }
