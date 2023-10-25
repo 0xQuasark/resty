@@ -7,7 +7,7 @@ const Results = (props) => {
   return (
     <section>
       {/* <pre>{props.data ? JSON.stringify(props.data, undefined, 2) : null}</pre> */}
-      <JSONPretty id="json-pretty" data={props} ></JSONPretty>
+      <JSONPretty data-testid='results' id="json-pretty" data={props} ></JSONPretty>
     </section>
   );
 }
