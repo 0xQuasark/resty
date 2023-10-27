@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import './Form.scss';
 
-const Form = ({ handleApiCall }) => {
-  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/');
+const Form = ({ handleApiCall, setShouldCallApi }) => {
+  const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState('');
   const [loading, setLoading] = useState(false);
@@ -13,10 +13,11 @@ const Form = ({ handleApiCall }) => {
     setLoading(true);
     handleApiCall({ method, url, body });
     setLoading(false);
+    setShouldCallApi(true)
   }
 
   return (
-      <>
+    <>
       <form onSubmit={handleSubmit}>
         <label >
           <span>URL: </span>
@@ -35,8 +36,8 @@ const Form = ({ handleApiCall }) => {
         </label>
         </form>
         {loading && 'I am loading'}
-      </>
-    );
+    </>
+  );
 }
 
 export default Form;
